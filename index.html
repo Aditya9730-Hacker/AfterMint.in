@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mukhwas - Food Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.6/dialog-polyfill.min.css"/>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dialog-polyfill/0.5.6/dialog-polyfill.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="mdl-color--grey-50 bg-gray-50">
+  <div class="app-container max-w-screen-md mx-auto">
+    <!-- Auth Screen -->
+    <section id="auth-screen" class="screen">
+      <div class="auth-card mdl-card mdl-shadow--6dp rounded-2xl overflow-hidden bg-white">
+        <div class="mdl-card__title mdl-color--primary mdl-color-text--white bg-indigo-600">
+          <h2 class="mdl-card__title-text text-white">Welcome</h2>
+        </div>
+        <div class="mdl-card__supporting-text p-6 space-y-3">
+          <p class="mdl-typography--body-1 text-gray-700">Enter your details to continue.</p>
+          <form id="auth-form">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+              <input class="mdl-textfield__input" type="text" id="auth-name" required value="Aditya" />
+              <label class="mdl-textfield__label" for="auth-name">Full Name</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+              <input class="mdl-textfield__input" type="tel" id="auth-phone" required value="9876543210" />
+              <label class="mdl-textfield__label" for="auth-phone">Mobile Number</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+              <input class="mdl-textfield__input" type="email" id="auth-email" required value="user@example.com" />
+              <label class="mdl-textfield__label" for="auth-email">Email Address</label>
+            </div>
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect full-width w-full !bg-indigo-600 !text-white">Continue</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main App Screen -->
+    <section id="app-screen" class="screen hidden">
+      <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Mukhwas</span>
+          <div class="mdl-layout-spacer"></div>
+          <a class="mdl-button mdl-js-button mdl-button--icon" href="admin.html" title="Admin Panel">
+            <i class="material-icons">admin_panel_settings</i>
+          </a>
+        </div>
+      </header>
+
+      <main class="content px-3">
+        <!-- Home -->
+        <div id="tab-home" class="tab-content">
+          <div id="categories" class="category-chips"></div>
+          <div id="food-grid" class="food-grid"></div>
+        </div>
+
+        <!-- Search -->
+        <div id="tab-search" class="tab-content hidden">
+          <div class="search-bar">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+              <label class="mdl-button mdl-js-button mdl-button--icon" for="search-input">
+                <i class="material-icons">search</i>
+              </label>
+              <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" id="search-input" placeholder="Search food...">
+              </div>
+            </div>
+          </div>
+          <div id="search-results" class="food-grid"></div>
+        </div>
+
+        <!-- Orders -->
+        <div id="tab-orders" class="tab-content hidden">
+          <h5 class="section-title">Your Orders</h5>
+          <div id="orders-list" class="orders-list"></div>
+        </div>
+
+        <!-- Profile -->
+        <div id="tab-profile" class="tab-content hidden">
+          <h5 class="section-title">Profile</h5>
+          <div class="mdl-card mdl-shadow--2dp profile-card">
+            <div class="mdl-card__supporting-text">
+              <div class="profile-row"><span class="key">Name</span><span id="profile-name" class="val"></span></div>
+              <div class="profile-row"><span class="key">Email</span><span id="profile-email" class="val"></span></div>
+              <div class="profile-row"><span class="key">Mobile</span><span id="profile-phone" class="val"></span></div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Bottom Nav -->
+      <nav class="bottom-nav mdl-color--white mdl-shadow--4dp bg-white border-t border-gray-100">
+        <button class="nav-btn is-active text-indigo-600" data-tab="home">
+          <i class="material-icons">home</i>
+          <span>Home</span>
+        </button>
+        <button class="nav-btn" data-tab="search">
+          <i class="material-icons">search</i>
+          <span>Search</span>
+        </button>
+        <button class="nav-btn" data-tab="orders">
+          <i class="material-icons">receipt_long</i>
+          <span>Orders</span>
+        </button>
+        <button class="nav-btn" data-tab="profile">
+          <i class="material-icons">person</i>
+          <span>Profile</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- Order Form Dialog -->
+    <dialog id="order-dialog" class="mdl-dialog">
+      <h4 class="mdl-dialog__title">Place Order</h4>
+      <div class="mdl-dialog__content">
+        <form id="order-form">
+          <input type="hidden" id="order-food-id" />
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="order-name" required />
+            <label class="mdl-textfield__label" for="order-name">Full Name</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="tel" id="order-phone" required />
+            <label class="mdl-textfield__label" for="order-phone">Mobile Number</label>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" id="order-address" rows="3" required></textarea>
+            <label class="mdl-textfield__label" for="order-address">Current Address</label>
+          </div>
+        </form>
+      </div>
+      <div class="mdl-dialog__actions">
+        <button id="order-submit" type="button" class="mdl-button mdl-button--raised mdl-button--colored">Place Order</button>
+        <button type="button" class="mdl-button close">Cancel</button>
+      </div>
+    </dialog>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

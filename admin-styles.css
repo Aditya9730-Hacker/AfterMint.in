@@ -1,0 +1,16 @@
+@import url('styles.css');
+
+/* Overrides for admin */
+.list{display:flex;flex-direction:column;gap:12px}
+.admin-order{display:flex;gap:12px;align-items:center;background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:transform .2s ease, box-shadow .2s ease}
+.admin-order:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.admin-order .meta{flex:1}
+.admin-order .actions{display:flex;align-items:center;gap:8px}
+.admin-order .actions .mdl-button{transition:transform .15s ease, box-shadow .2s ease}
+.admin-order .actions .mdl-button:hover{transform:translateY(-1px)}
+.badge{padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600}
+.badge.pending{background:rgba(76,175,80,.12);color:#2e7d32}
+.badge.success{background:rgba(244,67,54,.12);color:#c62828}
+
+/* make auth card consistent */
+.auth-card{width:100%;max-width:520px;margin:auto;border-radius:14px;overflow:hidden}
